@@ -16,8 +16,10 @@ var weaponsReady = true
 
 //Object Data
 var loot = {
-	"type": ["gold", "emeralds", "diamonds"],
-	"available": true
+	"type": ["Gold", "Emeralds", "Rubies", "Diamonds"],
+	"available": true,
+	"value": [5, 10, 15, 20],
+	"mergedValue": {"type":0,"value":0}
 };
 
 var weaponAxe = {
@@ -27,10 +29,10 @@ var weaponAxe = {
 	"cleaveDamage": 10,	
 	"durability": 10,
 	"isSharp": 		true,												//property: boolean
-	"getDamage": function(){				 							//method: accessor								
+	"getDamage": function(hasWeapon){				 					//method: accessor								
 		var totalDamage = this.baseDamage + this.cleaveDamage			//math
 			var totalDamage =  this.baseDamage + this.cleaveDamage 		//method: procedure
-			if  ( this.isSharp === true ) {								
+			if  ( this.isSharp === true && hasWeapon === true ) {								
 				totalDamage += 5;
 			} 						
 			else {
@@ -75,7 +77,7 @@ var weaponBow = {
 var allHeroes = function (json) {
 	for (var i = 0; i < json.heroes.length; i++) {													//for loop
 		var heroData = json.heroes[i];
-		console.log("A quick scan around the camp reveals a few notable heroes. " + heroData.name + ", the " + heroData.job + ", with only their " + heroData.typeOfWeapon + ", with a seasoned ranking of " + heroData.level); 
+		console.log("A quick scan around the camp reveals a few notable heroes. " + heroData.name + ", the " + heroData.job + ", with " + heroData.typeOfWeapon + " in hand and a seasoned ranking of " + heroData.level); 
 	};
 };
 
@@ -107,7 +109,7 @@ var readyCheck = function(health, numberOfPotions) {
 		console.log( "We should rest up to 100 health and make sure we have at least " + amountOfPotions+ " " + potions + " potions before we head out." );
 	};
 		if ( health === 100 && numberOfPotions === 5 ) {
-			return (true);
+			return (true);																			//return boolean
 		} else {
 			return (false);
 		};
@@ -117,8 +119,8 @@ var readyCheck = function(health, numberOfPotions) {
 
 //String Function
 var baronAppears = function(travelDistance, monster) {
-	var monsterFight = ( "After leaving camp and traveling " + travelDistance + ". They encounter " + monster + "!" );
-	return monsterFight;
+	var monsterFight = console.log( "After leaving camp and traveling " + travelDistance + ". They encounter " + monster + "!" );
+	return monsterFight;																			//return string
 };
 
 
@@ -129,10 +131,10 @@ var baronFight = function(baronHP) {
 		while (baronHP > 0) {																		//while loop
 		
 			console.log( monster + "'s health is " + baronHP);
-			baronHP = baronHP - 50																	//math
+			baronHP = baronHP - weaponAxe.getDamage(json.heroes[1].hasWeapon)													//math & boolean argument
 		
 			if (baronHP > 0) {
-				console.log( monster + " has been attacked by our heroes for 50 damage" );
+				console.log( monster + " has been attacked by " + json.heroes[1].name + " with his " + weaponAxe.type + ".");
 			} else {
 				console.log( monster + " has been slain.");
 			};
@@ -149,16 +151,15 @@ var chests = function(argArray, number) {
 	var chestTypes = argArray.length;																//local variable
 	var timedTreasureHunt = number - chestTypes
 		argArray.push("Sapphire")
-		
 	for ( var time = 0; time < timedTreasureHunt; time ++) {
 	var timeRemain = (timedTreasureHunt - time);
 		console.log("Look around for treasure, " + timeRemain + " minutes remain before we have to depart.");	
 	};
-	for ( var i= 0;  i <= chestTypes; i++) {
+	for ( var i= 0;  i < chestTypes; i++) {
 		console.log("Huzzah! Look at all the loot! " + argArray[i] + " chests for everyone!");
 	};
 	var updatedArray = argArray
-	return updatedArray
+	return updatedArray																				//return array
 };
 
 
@@ -168,11 +169,7 @@ var chests = function(argArray, number) {
 allHeroes(json)  																		//JSON Data
 letsGoAdventuring("yes") 																//Procedure
 var status = readyCheck(100, 5);
-console.log(status);																	//Return for Boolean
-var monsterFight = baronAppears("a fortnight", "Baron Nashor");								//argument: string
-console.log(monsterFight);																//Return for String
-var baronLife = baronFight(500);															//argument: number
-	console.log(baronLife);   															//Return for Number
-var updatedChests = chests (["Gold", "Diamond", "Emerald"], 10);  							//argument: array
-	console.log(updatedChests);   														//Return for Array
+var monsterFight = baronAppears("a fortnight", "Baron Nashor");							//argument: string
+var baronLife = baronFight(500);														//argument: number
+var updatedChests = chests (loot.type, 10);  						//argument: array
 		
