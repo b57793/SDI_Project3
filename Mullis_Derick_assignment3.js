@@ -4,38 +4,72 @@
 // Project 3
 // This script is for completion of project 3.  Heroes are at it again.
 
-//Variables
+
+
+//Global Variables
 var monster = "Baron Nashor"
 var potions = "health"
 var amountOfPotions = 5
 var weaponsReady = true
 
+
+
 //Object Data
-var json = {
-	"heroes": [
-		{
-			"name": 			"Tehkuv",
-			"job": 				"Ranger",
-			"hasWeapon": 		true,
-			"typeOfWeapon": 	"bow",
-			"level": 			31	
+var loot = {
+	"type": ["gold", "emeralds", "diamonds"],
+	"available": true
+};
+
+var weaponAxe = {
+	"type": 		"axe",												//property: sting
+	"ability": 		"cleave",
+	"baseDamage": 	15,													//property: number
+	"cleaveDamage": 10,	
+	"durability": 10,
+	"isSharp": 		true,												//property: boolean
+	"getDamage": function(){				 							//method: accessor								
+		var totalDamage = this.baseDamage + this.cleaveDamage			//math
+			var totalDamage =  this.baseDamage + this.cleaveDamage 		//method: procedure
+			if  ( this.isSharp === true ) {								
+				totalDamage += 5;
+			} 						
+			else {
+				totalDamage += 0;
+			}
+			return totalDamage											//return number
 		},
-		{
-			"name": 			"Vaus",
-			"job": 				"Warrior",
-			"hasWeapon": 		true,
-			"typeOfWeapon": 	"axe",
-			"level": 			27	
-		},	
-		{
-			"name": 			"Teleria",
-			"job": 				"Monk",
-			"hasWeapon": 		false,
-			"typeOfWeapon": 	"fists",
-			"level": 			36	
+		"newDamage": function(newDamage){								//method:  mutator
+			if ( this.durability <= 0 ) {	
+				this.isSharp = false
+			};
+	}							
+};
+	
+var weaponBow = {
+	"type":		 	"bow",
+	"ability": 		"strike",
+	"baseDamage": 	20,
+	"strikeDamage": 10,
+	"isSharp": 		true,
+	"durability": 10,
+	"getDamage": function(){											//method: function
+		var totalDamage =  this.baseDamage + this.strikeDamage 			//local variables
+			if  ( this.isSharp === true ) {								
+				totalDamage += 5;
+			} 						
+			else {
+				totalDamage += 0;
+			}
+			return totalDamage
+		},
+		"newDamage": function(newDamage){								//method:  mutator
+			if ( this.durability <= 0 ) {	
+				this.isSharp = false
+			};
 		}
-	]
-}; 
+};
+
+
 
 //JSON Function
 var allHeroes = function (json) {
@@ -45,6 +79,9 @@ var allHeroes = function (json) {
 	};
 };
 
+
+
+
 //Procedure
 var letsGoAdventuring = function(feelingAdventurous) {
 	if ( feelingAdventurous === "yes" ) {
@@ -53,6 +90,9 @@ var letsGoAdventuring = function(feelingAdventurous) {
 		console.log( "The check their health and potions before heading out." );
 	};
 };
+
+
+
 
 // Boolean Function
 var readyCheck = function(health, numberOfPotions) {
@@ -73,11 +113,16 @@ var readyCheck = function(health, numberOfPotions) {
 		};
 };
 
+
+
 //String Function
 var baronAppears = function(travelDistance, monster) {
 	var monsterFight = ( "After leaving camp and traveling " + travelDistance + ". They encounter " + monster + "!" );
 	return monsterFight;
 };
+
+
+
 
 //Number Function
 var baronFight = function(baronHP) {
@@ -95,6 +140,9 @@ var baronFight = function(baronHP) {
 		var BaronLife = baronHP
 		return BaronLife		
 };
+
+
+
 
 //Array Function
 var chests = function(argArray, number) {
@@ -117,9 +165,8 @@ var chests = function(argArray, number) {
 
 
 //Main Code
-allHeroes(json)  //JSON Data
-
-letsGoAdventuring("yes") //Procedure
+allHeroes(json)  																		//JSON Data
+letsGoAdventuring("yes") 																//Procedure
 var status = readyCheck(100, 5);
 console.log(status);																	//Return for Boolean
 var monsterFight = baronAppears("a fortnight", "Baron Nashor");								//argument: string

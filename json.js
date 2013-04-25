@@ -19,13 +19,6 @@ var json = {
 			"hasWeapon": 		true,
 			"typeOfWeapon": 	"axe",
 			"level": 			27	
-		},	
-		{
-			"name": 			"Teleria",
-			"job": 				"Monk",
-			"hasWeapon": 		false,
-			"typeOfWeapon": 	"fists",
-			"level": 			36	
-		}
+		}	
 	]
 }; 
