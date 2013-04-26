@@ -13,13 +13,12 @@ var amountOfPotions = 5
 var weaponsReady = true
 
 
-
 //Object Data
 var loot = {
 	"type": ["Gold", "Emeralds", "Rubies", "Diamonds"],
 	"available": true,
-	"value": [5, 10, 15, 20],
-	"mergedValue": {"type":0,"value":0}
+//	"value": [5, 10, 15, 20],    ~Failed attempt @ object property
+//	"mergedValue": {"type":0,"value":0}  ~Failed attempt @ object property
 };
 
 var weaponAxe = {
@@ -46,36 +45,13 @@ var weaponAxe = {
 			};
 	}							
 };
-	
-var weaponBow = {
-	"type":		 	"bow",
-	"ability": 		"strike",
-	"baseDamage": 	20,
-	"strikeDamage": 10,
-	"isSharp": 		true,
-	"durability": 10,
-	"getDamage": function(){											//method: function
-		var totalDamage =  this.baseDamage + this.strikeDamage 			//local variables
-			if  ( this.isSharp === true ) {								
-				totalDamage += 5;
-			} 						
-			else {
-				totalDamage += 0;
-			}
-			return totalDamage
-		},
-		"newDamage": function(newDamage){								//method:  mutator
-			if ( this.durability <= 0 ) {	
-				this.isSharp = false
-			};
-		}
-};
+
 
 
 
 //JSON Function
-var allHeroes = function (json) {
-	for (var i = 0; i < json.heroes.length; i++) {											//for loop
+var allHeroes = function (json) {										//argument: property
+	for (var i = 0; i < json.heroes.length; i++) {						//for loop
 		var heroData = json.heroes[i];
 		console.log("A quick scan around the camp reveals a few notable heroes. " + heroData.name + ", the " + heroData.job + ", with " + heroData.typeOfWeapon + " in hand and a seasoned ranking of " + heroData.level); 
 	};
