@@ -25,7 +25,7 @@ var loot = {
 var weaponAxe = {
 	"type": 		"axe",												//property: sting
 	"ability": 		"cleave",
-	"baseDamage": 	15,													//property: number
+	"baseDamage": 	40,													//property: number
 	"cleaveDamage": 10,	
 	"durability": 10,
 	"isSharp": 		true,												//property: boolean
@@ -75,7 +75,7 @@ var weaponBow = {
 
 //JSON Function
 var allHeroes = function (json) {
-	for (var i = 0; i < json.heroes.length; i++) {													//for loop
+	for (var i = 0; i < json.heroes.length; i++) {											//for loop
 		var heroData = json.heroes[i];
 		console.log("A quick scan around the camp reveals a few notable heroes. " + heroData.name + ", the " + heroData.job + ", with " + heroData.typeOfWeapon + " in hand and a seasoned ranking of " + heroData.level); 
 	};
@@ -87,7 +87,7 @@ var allHeroes = function (json) {
 //Procedure
 var letsGoAdventuring = function(feelingAdventurous) {
 	if ( feelingAdventurous === "yes" ) {
-		console.log( "The heroes appear adventurous and start checking their gear." );				//output
+		console.log( "The heroes appear adventurous and start checking their gear." );		//output
 	} else {
 		console.log( "The check their health and potions before heading out." );
 	};
@@ -98,9 +98,9 @@ var letsGoAdventuring = function(feelingAdventurous) {
 
 // Boolean Function
 var readyCheck = function(health, numberOfPotions) {
-	if ( health === 100 && numberOfPotions >= 5 ) {													//conditional
+	if ( health === 100 && numberOfPotions >= 5 ) {											//conditional
 		console.log( "The ready check is complete and they are good to go." )
-		if ( weaponsReady === true ) {																//nested conditional
+		if ( weaponsReady === true ) {														//nested conditional
 			console.log ( "'Our weapons are ready and yearn for battle', they proclaim!" );
 		} else {
 			console.log ( "Well actually, we need to condition our weapons before heading out." );
@@ -109,7 +109,7 @@ var readyCheck = function(health, numberOfPotions) {
 		console.log( "We should rest up to 100 health and make sure we have at least " + amountOfPotions+ " " + potions + " potions before we head out." );
 	};
 		if ( health === 100 && numberOfPotions === 5 ) {
-			return (true);																			//return boolean
+			return (true);																	//return boolean
 		} else {
 			return (false);
 		};
@@ -120,7 +120,7 @@ var readyCheck = function(health, numberOfPotions) {
 //String Function
 var baronAppears = function(travelDistance, monster) {
 	var monsterFight = console.log( "After leaving camp and traveling " + travelDistance + ". They encounter " + monster + "!" );
-	return monsterFight;																			//return string
+	return monsterFight;																	//return string
 };
 
 
@@ -128,7 +128,7 @@ var baronAppears = function(travelDistance, monster) {
 
 //Number Function
 var baronFight = function(baronHP) {
-		while (baronHP > 0) {																		//while loop
+		while (baronHP >= 0) {																//while loop
 		
 			console.log( monster + "'s health is " + baronHP);
 			baronHP = baronHP - weaponAxe.getDamage(json.heroes[1].hasWeapon)													//math & boolean argument
@@ -148,10 +148,10 @@ var baronFight = function(baronHP) {
 
 //Array Function
 var chests = function(argArray, number) {
-	var chestTypes = argArray.length;																//local variable
+	var chestTypes = argArray.length;														//local variable
 	var timedTreasureHunt = number - chestTypes
 		argArray.push("Sapphire")
-	for ( var time = 0; time < timedTreasureHunt; time ++) {
+	for ( var time = 1; time < timedTreasureHunt; time ++) {
 	var timeRemain = (timedTreasureHunt - time);
 		console.log("Look around for treasure, " + timeRemain + " minutes remain before we have to depart.");	
 	};
@@ -159,7 +159,7 @@ var chests = function(argArray, number) {
 		console.log("Huzzah! Look at all the loot! " + argArray[i] + " chests for everyone!");
 	};
 	var updatedArray = argArray
-	return updatedArray																				//return array
+	return updatedArray																		//return array
 };
 
 
@@ -170,6 +170,6 @@ allHeroes(json)  																		//JSON Data
 letsGoAdventuring("yes") 																//Procedure
 var status = readyCheck(100, 5);
 var monsterFight = baronAppears("a fortnight", "Baron Nashor");							//argument: string
-var baronLife = baronFight(500);														//argument: number
-var updatedChests = chests (loot.type, 10);  						//argument: array
+var baronLife = baronFight(165);														//argument: number
+var updatedChests = chests (loot.type, 10);  											//argument: array
 		
